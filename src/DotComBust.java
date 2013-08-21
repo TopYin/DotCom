@@ -9,9 +9,13 @@ public class DotComBust {
 
     private GameHelper helper= new GameHelper();
     private ArrayList<DotCom> dotComsList = new ArrayList<DotCom>();
-    private int numOfGuess = 0;
+    private int numOfGuesses = 0;
 
-    private setUpGame() {
+    private void setUpGame() {
+        /*
+        * 创建3个DotCom对象
+        * 并指派名称并置入ArrayList
+        */
         DotCom one = new DotCom();
         one.setName("Pets.com");
         DotCom two = new DotCom();
@@ -26,15 +30,15 @@ public class DotComBust {
         System.out.println("Pets.com, eToys.com, Go2.com");
         System.out.println("Try to sink them all in fewest number of guesses");
 
-        for (DotCom dotComToSet : dotComsList) {
-            ArrayList<String> newLocation = helper.placeDotCom(3);
-            dotComToSet.setLocationCells(newLocation);
+        for (DotCom dotComToSet : dotComsList) {   // 对list中所有的DotCom重复
+            ArrayList<String> newLocation = helper.placeDotCom(3); // 要求DotCom的位置
+            dotComToSet.setLocationCells(newLocation); // 调用这个DotCom的setter方法来指派刚取得的位置
         } // close for loop
     } // close setUpGame method
 
     private void StartPlaying() {
-        while (!dotComsList.isEmpty()) {
-            String userGuess = helper.getUserInput("Enter a guess");
+        while (!dotComsList.isEmpty()) {   // 判断DotCom的list是否为空
+            String userGuess = helper.getUserInput("Enter a guess");  // 取得玩家输入
             checkUserGuess(userGuess);
         } // close while
         finishGame();
@@ -45,7 +49,7 @@ public class DotComBust {
         String result = "miss";
 
         for (DotCom dotComToTest : dotComsList) {
-            result = dotComToTest.checkYourself(uerGuess);
+            result = dotComToTest.checkYourself(userGuess);
             if (result.equals("hit")) {
                 break;
             }
@@ -69,9 +73,9 @@ public class DotComBust {
     } // close method
 
     public static void main(String[] args) {
-        DotComBust game = new DotComBust();
-        game.setUpGame();
-        game.StartPlaying();
+        DotComBust game = new DotComBust();  // 创建游戏对象
+        game.setUpGame();      // 要求游戏对象启动
+        game.StartPlaying();   // 要求游戏对象启动游戏的主要循环
     } // close method
 
 } // close class
